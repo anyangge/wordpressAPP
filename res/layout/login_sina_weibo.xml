@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/weibo_sina">
+    
+	<LinearLayout
+	    android:layout_marginTop="40dip"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:gravity="center_horizontal">
+	    <TextView 
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textColor="@color/black"
+	        android:text="@string/login_weibo_label_account"/>            
+	    <EditText
+	        android:id="@+id/login_sina_edittext_username"
+	        android:layout_height="wrap_content"
+	        android:layout_width="180dp"
+	        android:layout_marginLeft="10dip"
+	        android:singleLine="true"/>
+	</LinearLayout>
+	
+	<LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:gravity="center_horizontal">
+	    <TextView
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textColor="@color/black"
+	        android:text="@string/login_weibo_label_password"/>            
+	    <EditText
+	        android:id="@+id/login_sina_edittext_password"
+	        android:layout_height="wrap_content"
+	        android:layout_width="180dp"
+	        android:layout_marginLeft="10dip"
+	        android:singleLine="true"
+	        android:password="true"/> 
+    </LinearLayout>
+
+	<CheckBox
+	    android:id="@+id/login_sina_checkbox_savepwd"
+	    android:layout_width="140dp"
+	    android:layout_height="wrap_content"
+	    android:text="@string/login_weibo_label_remember"
+	    android:textColor="@color/black"
+	    android:textSize="12sp" />
+   	
+   	<Button
+   		android:id="@+id/login_sina_button_login"
+   		android:layout_width="140dp"
+   		android:layout_height="wrap_content"
+   		android:text="@string/login_weibo_label_share"/>
+   	
+</LinearLayout>

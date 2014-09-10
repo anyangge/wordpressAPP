@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#FFFFFF</color>
+	<color name="black">#000000</color>
+	<color name="gray">#808080</color>
+	<color name="red">#FF0000</color>
+	<color name="gold">#FFD700</color>
+	<color name="yellow">#FFFF00</color>
+	<color name="green">#008000</color>
+	<color name="blue">#0000FF</color>
+	<color name="purple">#800080</color>
+	<color name="pink">#FFC0CB</color>
+	<color name="orange">#FFA500</color>
+	
+	<color name="blog_catalog_title">#808080</color>
+	<color name="blog_list_background">#FFFFFF</color>
+	<color name="blog_list_title">#000000</color>
+	<color name="blog_list_content">#696969</color>
+	<color name="blog_list_info">#A9A9A9</color>
+	<color name="blog_list_reviewcount">#808080</color>
+	
+	<color name="blog_detail_head_title">#000000</color>
+	<color name="blog_relative_title">#336699</color>
+	
+	<color name="blog_publish_head_title">#000000</color>
+	<color name="review_publish_head_title">#000000</color>
+	
+	<color name="blog_review_head_title">#333333</color>
+	<color name="blog_review_listview_index">#808080</color>
+	<color name="blog_review_listview_user">#333333</color>
+	<color name="blog_review_listview_date">#A9A9A9</color>
+	<color name="blog_review_listview_content">#696969</color>
+	
+	<color name="review_list_head_title">#333333</color>
+	<color name="review_list_blog_title">#333333</color>
+	<color name="review_list_user">#555555</color>
+	<color name="review_list_date">#A9A9A9</color>
+	<color name="review_list_content">#696969</color>
+	
+	<color name="foot_detail_reviewcount">#555555</color>
+	
+	<color name="pull_to_refresh_lastUpdated">#cc6600</color>
+	
+	<color name="about_powered">#868686</color>
+</resources>

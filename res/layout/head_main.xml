@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+   	android:layout_height="40dp"
+   	android:paddingLeft="6dp"
+   	android:paddingRight="6dp"
+   	android:paddingBottom="2dp"
+   	android:gravity="center_vertical"
+   	android:background="@drawable/head_background">
+   	
+   	<ImageView
+   		android:id="@+id/app_logo"
+   		android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:src="@drawable/logo"
+   		android:scaleType="fitStart"/>
+	<TextView
+		android:layout_width="fill_parent"
+   		android:layout_height="wrap_content"
+   		android:layout_weight="10"
+   		android:layout_gravity="center"
+   		android:gravity="center"
+   		android:singleLine="true"
+   		android:ellipsize="end"/>	
+	<TextView
+		android:id="@+id/main_textview_category"
+		android:layout_width="wrap_content"
+   		android:layout_height="fill_parent"
+   		android:gravity="center_vertical"
+   		android:singleLine="true"
+   		android:ellipsize="end"
+   		android:textColor="@color/blog_catalog_title"
+   		android:text="@string/main_textview_category"/>
+
+   	<ImageView
+   	    android:id="@+id/main_imageview_category_down"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="10dp"
+   	    android:layout_marginTop="2dp"
+   	    android:layout_marginLeft="3dp"
+   	    android:scaleType="center"
+   	    android:src="@drawable/head_catalog_down" />
+
+</LinearLayout>

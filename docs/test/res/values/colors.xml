@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#FFFFFF</color>
+	<color name="black">#000000</color>
+	<color name="gray">#808080</color>
+	<color name="red">#FF0000</color>
+	<color name="gold">#FFD700</color>
+	<color name="yellow">#FFFF00</color>
+	<color name="green">#008000</color>
+	<color name="blue">#0000FF</color>
+	<color name="purple">#800080</color>
+	<color name="pink">#FFC0CB</color>
+	<color name="orange">#FFA500</color>
+	
+	<color name="blog_catalog_title">#app_style_blog_catalog_title#</color>
+	<color name="blog_list_background">#app_style_blog_list_background#</color>
+	<color name="blog_list_title">#app_style_blog_list_title#</color>
+	<color name="blog_list_content">#app_style_blog_list_content#</color>
+	<color name="blog_list_info">#app_style_blog_list_info#</color>
+	<color name="blog_list_reviewcount">#app_style_blog_list_reviewcount#</color>
+	
+	<color name="blog_detail_head_title">#app_style_blog_detail_head_title#</color>
+	<color name="blog_relative_title">#app_style_blog_relative_title#</color>
+	
+	<color name="blog_publish_head_title">#app_style_blog_publish_head_title#</color>
+	<color name="review_publish_head_title">#app_style_review_publish_head_title#</color>
+	
+	<color name="blog_review_head_title">#app_style_blog_review_head_title#</color>
+	<color name="blog_review_listview_index">#app_style_blog_review_listview_index#</color>
+	<color name="blog_review_listview_user">#app_style_blog_review_listview_user#</color>
+	<color name="blog_review_listview_date">#app_style_blog_review_listview_date#</color>
+	<color name="blog_review_listview_content">#app_style_blog_review_listview_content#</color>
+	
+	<color name="review_list_head_title">#app_style_review_list_head_title#</color>
+	<color name="review_list_blog_title">#app_style_review_list_blog_title#</color>
+	<color name="review_list_user">#app_style_review_list_user#</color>
+	<color name="review_list_date">#app_style_review_list_date#</color>
+	<color name="review_list_content">#app_style_review_list_content#</color>
+	
+	<color name="foot_detail_reviewcount">#app_style_foot_detail_reviewcount#</color>
+	
+	<color name="pull_to_refresh_lastUpdated">#app_style_pull_to_refresh_lastUpdated#</color>
+	
+	<color name="about_powered">#app_style_about_powered#</color>
+</resources>

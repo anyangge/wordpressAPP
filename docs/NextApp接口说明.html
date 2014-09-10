@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+	<title>NextApp 接口说明文档（博客版）</title>
+	<style>
+	body {font-size:10.5pt;font-family:Comic Sans,Verdana,Simsun,sans-serif;}
+	.head {margin:10px 0 50px 0;}
+	.head h1 {font-size:16pt;border-bottom:none;}
+	.head p {font-size:9pt;color:#666;margin:5px 0 0 0;padding:0;}
+	.h1 {margin:20px 0;}
+	h1 {font-size:14pt;border-bottom:2px solid #40AA53;}
+	h3 {font-size:12pt;}
+	.node {margin:0 0 50px 0 ;}
+	pre {color:#33f;font-size:10pt;}
+	table {background:#666;}
+	table th {background:#060;color:#fff;padding:3px;font-size:10pt;}
+	table td {background:#fff;padding:3px;font-size:9pt;}
+	</style>
+</head>
+<body>
+	<div class='head'>
+		<h1>NextApp 接口说明文档（博客版）</h1>
+		<p>作者：@红薯 (<a href="http://my.oschina.net/javayou" target="_blank">http://my.oschina.net/javayou</a>)</p>
+		<p>版本：1.0 beta</p>
+		<p>最后修改时间：2011-11-21</p>
+	</div>
+	<div class='h1'>
+	<h1>目录</h1>
+	<ul>
+		<li><a href="#outline">概述</a></li>
+		<li><a href="#def">接口定义</a></li>
+		<li><a href="#list">接口详细说明</a></li>
+	</ul>
+	</div>
+	<div class='h1'>
+	<h1><a name='outline'></a>概述</h1>
+	<p>
+		NextApp 接口是博客网站提供给手机客户端用来访问博客分类、文章以及评论的数据接口。共包含 9 个基本的接口，详情请看下一节的接口定义。
+	</p>
+	</div>
+	<div class='h1'>
+	<h1><a name='def'></a>接口定义</h1>
+	<p>下面是一个基本的XML格式的接口定义文档。你可以使用任何程序来生成包含如下格式的文档。此文档必须能在互联网通过特定的URL地址访问，例如 http://www.oschina.net/nextapp-app.jsp。接口定义中的URL可以是相对地址也可以是完全的URL地址，具体每一项的格式要求我们将在下一节进行详细介绍。</p>
+	<pre>    
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+	
+	&lt;urls&gt;
+		&lt;catalog-list&gt;catalogs.php&lt;/catalog-list&gt;&lt;!-- 返回文章分类 --&gt;
+		
+		&lt;post-list&gt;post.php?action=list&lt;/post-list&gt;&lt;!-- 返回博客列表(id、标题、概要) --&gt;
+		&lt;post-detail&gt;post.php?action=show&lt;/post-detail&gt;&lt;!-- 返回一篇博客的详细内容 --&gt;
+		&lt;post-pub&gt;post.php?action=publish&lt;/post-pub&gt;&lt;!-- 发布博客 --&gt;
+		&lt;post-delete&gt;post.php?action=delete&lt;/post-delete&gt;&lt;!-- 删除文章 --&gt;
+		
+		&lt;comment-list&gt;comment.php?action=list&lt;/comment-list&gt;&lt;!-- 获取评论列表 --&gt;
+		&lt;comment-pub&gt;comment.php?action=publish&lt;/comment-pub&gt;&lt;!-- 发表评论 --&gt;
+		&lt;comment-delete&gt;comment.php?action=delete&lt;/comment-delete&gt;
+		
+		&lt;login-validate&gt;login.php&lt;/login-validate&gt;&lt;!-- 登录验证地址 --&gt;&gt;
+	&lt;/urls&gt;    	
+
+&lt;/nextapp&gt;
+	</pre>
+	</div>
+	<div class='h1'>
+	<h1><a name='list'></a>接口详细说明</h1>
+	<div class='node'><h3>&lt;catalog-list&gt;</h3>
+	<p>用于获取博客分类列表的接口</p>
+	<p>输入参数：&lt;无&gt;</p>
+	<p>请求示例：http://www.oschina.net/catalog-list</p>
+	<p>输出内容：</p>
+	<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+	
+	&lt;catalogs&gt;
+		&lt;catalog id="11" name="分类1"/&gt;
+		&lt;catalog id="12" name="分类2"/&gt;
+		&lt;catalog id="13" name="分类3"/&gt;
+		&lt;catalog id="14" name="分类4"/&gt;
+		&lt;catalog id="15" name="分类5"/&gt;
+	&lt;/catalogs&gt;
+
+&lt;/nextapp&gt;
+	</pre>
+	</div>
+	<div class='node'>
+	<h3>&lt;post-list&gt;</h3>
+	<p>用于获取文章列表的接口，按文章发表的时间排序，最新的文章排在最前面</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>catalog</td>
+				<td>整数</td>
+				<td>分类编号，如果该值为0 则获取所有的文章</td>
+			</tr>
+			<tr>
+				<td>fromPost</td>
+				<td>整数</td>
+				<td>从某篇文章开始读取下一批文章列表，不包含此篇文章本身，如果要读取最新的文章列表，只需要传递一个足够大的整数或者数字0即可，例如99999999</td>
+			</tr>
+			<tr>
+				<td>fetchCount</td>
+				<td>整数</td>
+				<td>读取的文章数，例如一次读取10篇文章</td>
+			</tr>
+		</table>
+	</p>
+	<p>请求示例：http://www.oschina.net/post-list?catalog=12&fromPost=999999999&fetchCount=10</p>
+	<p>输出内容：</p>
+	<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;	
+  &lt;catalog&gt;0&lt;/catalog&gt;&lt;!-- 当前列表的分类，0表示所有文章 --&gt;
+  &lt;postCount&gt;76&lt;/postCount&gt;&lt;!-- 总的文章数，如果catalog值不为0，则为指定分类下的文章数 --&gt;
+  &lt;posts&gt;
+    &lt;post&gt;
+      &lt;id&gt;11&lt;/id&gt;
+      &lt;title&gt;文章标题1&lt;/title&gt;
+      &lt;url&gt;文章的链接地址，用于客户端分享到微博1&lt;/url&gt;
+      &lt;outline&gt;文章简短介绍（概要信息）&lt;/outline&gt;
+      &lt;commentCount&gt;4&lt;/commentCount&gt; &lt;!-- 评论数 --&gt;
+      &lt;author&gt;红薯&lt;/author&gt;
+      &lt;catalog&gt;12&lt;/catalog&gt;
+      &lt;pubDate&gt;2011-11-20&lt;/pubDate&gt;
+    &lt;/post&gt;
+    &lt;post&gt;
+      &lt;id&gt;12&lt;/id&gt;
+      &lt;title&gt;文章标题2&lt;/title&gt;
+      &lt;url&gt;文章的链接地址，用于客户端分享到微博1&lt;/url&gt;
+      &lt;outline&gt;文章简短介绍（概要信息）&lt;/outline&gt;
+      &lt;commentCount&gt;2&lt;/commentCount&gt; &lt;!-- 评论数 --&gt;
+      &lt;author&gt;虫虫&lt;/author&gt;
+      &lt;catalog&gt;13&lt;/catalog&gt;
+      &lt;pubDate&gt;2011-11-17&lt;/pubDate&gt;
+    &lt;/post&gt;
+  &lt;/posts&gt;	
+&lt;/nextapp&gt;
+	</pre>
+	</div>
+	<div class='node'>
+	<h3>&lt;post-detail&gt;</h3>
+	<p>用于获取文章详情的接口</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>post</td>
+				<td>整数</td>
+				<td>文章编号</td>
+			</tr>
+		</table>
+	</p>
+	<p>请求示例：http://www.oschina.net/post-detail?post=12</p>
+	<p>输出内容：</p>
+	<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;	
+  &lt;post&gt;
+      &lt;id&gt;11&lt;/id&gt;
+      &lt;catalog&gt;12,15&lt;/catalog&gt;
+      &lt;title&gt;文章标题1&lt;/title&gt;
+      &lt;url&gt;文章的链接地址，用于客户端分享到微博1&lt;/url&gt;
+      &lt;body&gt;全文内容&lt;/body&gt;
+      &lt;tags&gt;文章标签,使用逗号分隔&lt;/tags&gt;
+      &lt;author&gt;红薯&lt;/author&gt;
+      &lt;pubDate&gt;2011-11-20&lt;/pubDate&gt;
+      &lt;commentCount&gt;4&lt;/commentCount&gt; &lt;!-- 评论数 --&gt;
+      &lt;relativePosts&gt;
+	&lt;relativePost&gt;
+	  &lt;id&gt;122&lt;/id&gt;
+	  &lt;title&gt;相关文章标题&lt;/title&gt;
+	  &lt;author&gt;相关文章作者&lt;/author&gt;
+      &lt;pubDate&gt;2011-11-17&lt;/pubDate&gt;
+	&lt;/relativePost&gt;
+      &lt;/relativePosts&gt;
+  &lt;/post&gt;
+&lt;/nextapp&gt;
+	</pre>
+	</div>
+	<div class='node'>
+	<h3>&lt;post-pub&gt;</h3>
+	<p>用于发表文章的接口，此功能仅限博主访问，客户端请求带有登录用户的cookie信息，请参考登录接口部分</p>
+	<p>输入参数（使用POST方式提交，支持文件上传的表单）：		
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>catalog</td>
+				<td>整数</td>
+				<td>文章存放的分类，允许选择多个分类</td>
+			</tr>
+			<tr>
+				<td>title</td>
+				<td>字符串</td>
+				<td>文章标题</td>
+			</tr>
+			<tr>
+				<td>body</td>
+				<td>字符串</td>
+				<td>文章完整内容</td>
+			</tr>
+			<tr>
+				<td>tag</td>
+				<td>字符串</td>
+				<td>文章的标签，使用逗号或者空格隔开的字符串</td>
+			</tr>
+			<tr>
+				<td>img</td>
+				<td>二进制</td>
+				<td>上传的图片，可能包含多个 img 参数</td>
+			</tr>
+		</table>
+	</p>
+	<p>请求示例：http://www.oschina.net/post-pub</p>
+	<p>输出内容：
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+  &lt;result&gt;
+    &lt;errorCode&gt;-2&lt;/errorCode&gt;
+    &lt;errorMessage&gt;没有删除权限&lt;/errorMessage&gt;
+  &lt;/result&gt;
+&lt;/nextapp&gt;		
+		</pre>
+	</p>
+	<p>errorCode说明：				
+		<table cellpadding='1' cellspacing='1'>
+			<tr><th>输出内容</th><th>说明</th></tr>
+			<tr><td>xxxx</td><td>大于0的整数表示发表成功，对应的刚发表的文章的编号</td></tr>
+			<tr><td>0</td><td>用户未登录</td></tr>
+			<tr><td>-2</td><td>没有删除权限</td></tr>
+			<tr><td>-1</td><td>其他错误</td></tr>
+		</table>
+	</p>
+	</div>
+	<div class='node'>
+	<h3>&lt;post-delete&gt;</h3>
+	<p>删除文章的接口，此功能仅限博主访问，客户端请求带有登录用户的cookie信息，请参考登录接口部分</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>post</td>
+				<td>整数</td>
+				<td>文章编号</td>
+			</tr>
+		</table>
+	</p>
+	<p>请求示例：http://www.oschina.net/post-delete?post=13</p>
+	<p>输出内容：
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+  &lt;result&gt;
+    &lt;errorCode&gt;-2&lt;/errorCode&gt;
+    &lt;errorMessage&gt;没有删除权限&lt;/errorMessage&gt;
+  &lt;/result&gt;
+&lt;/nextapp&gt;		
+		</pre>
+	</p>
+	<p>errorCode说明：		
+		<table cellpadding='1' cellspacing='1'>
+			<tr><th>输出内容</th><th>说明</th></tr>
+			<tr><td>1</td><td>删除成功</td></tr>
+			<tr><td>0</td><td>用户未登录</td></tr>
+			<tr><td>-2</td><td>没有删除权限</td></tr>
+			<tr><td>-1</td><td>其他错误</td></tr>
+		</table>
+	</p>
+	</div>
+	<div class='node'>
+	<h3>&lt;comment-list&gt;</h3>
+	<p>用于获取所有的评论列表数据的接口，按评论的时间，最新的评论排在最前面</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>post</td>
+				<td>整数</td>
+				<td>文章编号，如果该值为0或者小于0，则读取所有评论，否则读取指定文章的评论</td>
+			</tr>
+			<tr>
+				<td>fromComment</td>
+				<td>整数</td>
+				<td>从某篇评论开始读取下一批评论列表，不包含此篇评论本身，如果要读取最新的评论列表，只需要传递一个足够大的整数或者数字0即可，例如99999999</td>
+			</tr>
+			<tr>
+				<td>fetchCount</td>
+				<td>整数</td>
+				<td>读取的评论数，例如一次读取10篇评论</td>
+			</tr>
+			<tr>
+				<td>sortMethod</td>
+				<td>字符串</td>
+				<td>排序方法：descend:降序; ascend:升序</td>
+			</tr>
+		</table>
+	</p>
+	<p>请求示例：http://www.oschina.net/comment-list?fromComment=9999999&fetchCount=10&sortMethod=descend</p>
+	<p>输出内容：</p>
+	<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;	
+      &lt;commentCount&gt;145&lt;/commentCount&gt; &lt;!-- 总评论数 --&gt;
+      &lt;comments&gt;
+	&lt;comment&gt;
+	  &lt;id&gt;1&lt;/id&gt;
+	  &lt;post&gt;12&lt;/post&gt;
+	  &lt;name&gt;老枪1&lt;/name&gt;
+	  &lt;title&gt;所评论的文章标题&lt;/title&gt;
+	  &lt;email&gt;lq@qq.com&lt;/email&gt;
+	  &lt;url&gt;&lt;/url&gt;
+	  &lt;body&gt;写得很好啊1&lt;/body&gt;
+      &lt;pubDate&gt;2011-11-17&lt;/pubDate&gt;
+	&lt;/comment&gt;
+	&lt;comment&gt;
+	  &lt;id&gt;2&lt;/id&gt;
+	  &lt;post&gt;12&lt;/post&gt;	  
+	  &lt;name&gt;老枪2&lt;/name&gt;
+	  &lt;title&gt;所评论的文章标题&lt;/title&gt;
+	  &lt;email&gt;lq@qq.com&lt;/email&gt;
+	  &lt;url&gt;&lt;/url&gt;
+	  &lt;body&gt;写得很好啊2&lt;/body&gt;
+      &lt;pubDate&gt;2011-11-17&lt;/pubDate&gt;
+	&lt;/comment&gt;
+      &lt;/comments&gt;
+&lt;/nextapp&gt;
+	</pre>
+	</div>
+	<div class='node'>
+	<h3>&lt;comment-pub&gt;</h3>
+	<p>评论发表接口</p>
+	<p>输入参数：		
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>post</td>
+				<td>整数</td>
+				<td>文章编号</td>
+			</tr>
+			<tr>
+				<td>name</td>
+				<td>字符串</td>
+				<td>评论人姓名</td>
+			</tr>
+			<tr>
+				<td>email</td>
+				<td>字符串</td>
+				<td>评论人邮箱地址</td>
+			</tr>
+			<tr>
+				<td>url</td>
+				<td>字符串</td>
+				<td>评论人网址</td>
+			</tr>
+			<tr>
+				<td>body</td>
+				<td>字符串</td>
+				<td>评论内容</td>
+			</tr>
+		</table>
+	</p>
+	<p>输出内容：
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+  &lt;result&gt;
+    &lt;errorCode&gt;-2&lt;/errorCode&gt;
+    &lt;errorMessage&gt;没有评论权限&lt;/errorMessage&gt;
+  &lt;/result&gt;
+&lt;/nextapp&gt;		
+		</pre>
+	</p>
+	<p>errorCode说明：	
+		<table cellpadding='1' cellspacing='1'>
+			<tr><th>输出内容</th><th>说明</th></tr>
+			<tr><td>1</td><td>评论成功</td></tr>
+			<tr><td>-2</td><td>没有评论权限</td></tr>
+			<tr><td>-1</td><td>其他错误</td></tr>
+		</table>
+	</p>
+	</div>
+	<div class='node'>
+	<h3>&lt;comment-delete&gt;</h3>
+	<p>删除评论的接口，此功能仅限博主访问，客户端请求带有登录用户的cookie信息，请参考登录接口部分</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>comment</td>
+				<td>整数</td>
+				<td>评论编号</td>
+			</tr>
+		</table>
+	</p>
+	<p>输出内容：
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+  &lt;result&gt;
+    &lt;errorCode&gt;-2&lt;/errorCode&gt;
+    &lt;errorMessage&gt;没有删除权限&lt;/errorMessage&gt;
+  &lt;/result&gt;
+&lt;/nextapp&gt;		
+		</pre>
+	</p>
+	<p>errorCode说明：
+		<table cellpadding='1' cellspacing='1'>
+			<tr><th>输出内容</th><th>说明</th></tr>
+			<tr><td>1</td><td>评论删除成功</td></tr>
+			<tr><td>0</td><td>用户未登录</td></tr>
+			<tr><td>-2</td><td>没有删除权限</td></tr>
+			<tr><td>-1</td><td>其他错误</td></tr>
+		</table>
+	</p>
+	</div>
+	<div class='node'>
+	<h3>&lt;login-validate&gt;</h3>
+	<p>用户身份验证接口，参数使用POST方式提交，身份验证成功后写回1，并设置登录的cookie信息</p>
+	<p>输入参数：
+		<table cellpadding='1' cellspacing='1'>
+			<tr>
+				<th>参数名</th>
+				<th>参数类型</th>
+				<th>参数说明</th>
+			</tr>
+			<tr>
+				<td>username</td>
+				<td>字符串</td>
+				<td>登录帐号</td>
+			</tr>
+			<tr>
+				<td>pwd</td>
+				<td>字符串</td>
+				<td>登录密码</td>
+			</tr>
+			<tr>
+				<td>keep_login</td>
+				<td>字符串</td>
+				<td>是否记住登录信息，1：记住；0：不记住</td>
+			</tr>
+		</table>
+	</p>
+	<p>输出内容：
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nextapp&gt;
+  &lt;result&gt;
+    &lt;errorCode&gt;0&lt;/errorCode&gt;
+    &lt;errorMessage&gt;用户名或口令错&lt;/errorMessage&gt;
+  &lt;/result&gt;
+&lt;/nextapp&gt;		
+		</pre>
+	</p>
+	<p>errorCode说明：
+		<table cellpadding='1' cellspacing='1'>
+			<tr><th>输出内容</th><th>说明</th></tr>
+			<tr><td>1</td><td>登录成功</td></tr>
+			<tr><td>0</td><td>用户名或口令错</td></tr>
+			<tr><td>-1</td><td>其他错误</td></tr>
+		</table>
+	</p>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/quan"/>    	
+
+	<TextView 
+		android:id="@+id/blog_detail_relative_blog_title"
+        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:autoLink="all"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:textColor="@color/blog_relative_title"/>
+
+</LinearLayout>

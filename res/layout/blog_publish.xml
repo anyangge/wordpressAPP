@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    
+    <include layout="@layout/head_blog_publish" />
+
+	<ScrollView	
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="10"
+	    android:scrollbars="vertical"
+	    android:fadingEdge="none">
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+		
+		    <TextView 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="6dp"
+		        android:layout_marginLeft="2dp"
+		        android:text="@string/blog_publish_label_title"
+		        android:textSize="15sp"
+		        android:textColor="@color/black"/>
+		            
+		    <EditText
+		        android:id="@+id/post_blog_title"
+		        android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+		        android:singleLine="true"
+		        android:hint="@string/blog_publish_hint_title"/>
+		
+		    <TextView
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_marginLeft="2dp"
+		        android:text="@string/blog_publish_label_content"
+		        android:textSize="15sp"
+		        android:textColor="@color/black"/>
+		            
+		    <GridView
+			    android:id="@+id/post_blog_gridview"
+			    android:layout_width="fill_parent" 
+			    android:layout_height="wrap_content"
+			    android:numColumns="4"
+			    android:verticalSpacing="5dp"
+			    android:horizontalSpacing="5dp"
+			    android:columnWidth="88dp"
+			    android:gravity="center"/>
+		    <!-- 
+		    <EditText
+		        android:id="@+id/post_blog_content"
+		        android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+		        android:gravity="top"
+		        android:lines="9"
+		        android:hint="blog_publish_hint_content"/> -->
+			<com.commonsware.cwac.richedit.RichEditor xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:id="@+id/post_blog_content"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"/>
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="fill_parent"
+		        android:layout_height="wrap_content">
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="2dp"
+			        android:text="@string/blog_publish_label_tag"
+			        android:textSize="15sp"
+			        android:textColor="@color/black"/>
+				<TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="8dp"
+			        android:text="@string/blog_publish_label_tag_ps"
+			        android:textSize="12sp"
+			        android:textColor="@color/gray"/>
+		    </LinearLayout>
+		         
+		    <EditText
+		        android:id="@+id/post_blog_tag"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+				android:singleLine="true"
+		        android:hint="@string/blog_publish_hint_tag"/>
+		
+		    <TextView
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_marginLeft="2dp"
+		        android:text="@string/blog_publish_label_catalog"
+		        android:textSize="15sp"
+		        android:textColor="@color/black"/>
+		
+			<LinearLayout
+				android:id="@+id/post_blog_linearlayout_category"
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+		        android:layout_height="wrap_content">
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+    <include layout="@layout/foot_blog_publish"/>
+
+</LinearLayout>

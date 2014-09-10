@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<style name="anim_loading" parent="@android:style/Widget.ProgressBar.Large">
+		<item name="android:indeterminateDrawable">@anim/loading</item>
+	</style>
+	<style name="Dialog_Fullscreen">  
+	    <item name="android:windowFullscreen">true</item>  
+	    <item name="android:windowNoTitle">true</item>
+	</style>  
+
+</resources> 

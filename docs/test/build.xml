@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================================ -->
+<!-- Build an Android project.                        -->
+<!-- ================================================ -->
+<project name="NextApp" default="init" basedir=".">	
+
+	<!-- build.properties 新加  app_style=gray -->
+	<property file="build.properties" />
+	
+	<!-- 导入app样式执行脚本 -->
+	<import file="${basedir}/build-style.xml"/>
+	
+	<property name="res.abs" value="${basedir}/res"></property>
+	
+    <!-- Init the project 调用导入的样式脚本标签style-->
+    <target name="init" depends="style">
+        <echo>Init the project...</echo>
+    </target>       	
+
+
+</project>

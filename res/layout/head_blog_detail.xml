@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+	android:layout_height="40dp"
+	android:paddingBottom="2dp"
+	android:gravity="center_vertical"
+   	android:background="@drawable/head_background">
+
+   	<Button
+   		android:id="@+id/blog_detail_button_back" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:background="@drawable/head_back"/>
+   	<TextView 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_weight="10"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:textColor="@color/blog_detail_head_title"
+		android:textSize="16sp"
+		android:text="@string/head_blog_detail_title"/>
+	<Button
+   		android:id="@+id/blog_detail_button_review" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_marginTop="2dp"
+		android:paddingTop="6dp"
+		android:text="@string/head_blog_detail_review_button"/>
+    	
+</LinearLayout>

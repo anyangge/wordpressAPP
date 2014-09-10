@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>	
+
+	<property file="${app_style}/build-style.properties" />
+	
+	<!-- Is has image -->
+	<condition property="has_head_bg">  
+		<and>  
+			<available file="${app_style_head_bg}"/>
+			<length string="${app_style_head_bg}" trim="true" when="greater" length="0" />
+		</and>  
+	</condition>
+ 
+	<condition property="has_head_back">  
+	  	<and>  
+	   		<available file="${app_style_head_back}"/>
+	    	<length string="${app_style_head_back}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_head_catalog_down">  
+	  	<and>  
+	   		<available file="${app_style_head_catalog_down}"/>
+	    	<length string="${app_style_head_catalog_down}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_foot_bg">  
+	  	<and>  
+	   		<available file="${app_style_foot_bg}"/>
+	    	<length string="${app_style_foot_bg}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_foot_exp_icon">  
+	  	<and>  
+	   		<available file="${app_style_foot_exp_icon}"/>
+	    	<length string="${app_style_foot_exp_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_foot_review_icon">  
+	  	<and>  
+	   		<available file="${app_style_foot_review_icon}"/>
+	    	<length string="${app_style_foot_review_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_foot_share_icon">  
+	  	<and>  
+	   		<available file="${app_style_foot_share_icon}"/>
+	    	<length string="${app_style_foot_share_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_listview_divide">  
+	  	<and>  
+	   		<available file="${app_style_listview_divide}"/>
+	    	<length string="${app_style_listview_divide}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_listview_review_icon">  
+	  	<and>  
+	   		<available file="${app_style_listview_review_icon}"/>
+	    	<length string="${app_style_listview_review_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_home_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_home_icon}"/>
+	    	<length string="${app_style_menu_home_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_review_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_review_icon}"/>
+	    	<length string="${app_style_menu_review_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_publish_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_publish_icon}"/>
+	    	<length string="${app_style_menu_publish_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_login_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_login_icon}"/>
+	    	<length string="${app_style_menu_login_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_logout_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_logout_icon}"/>
+	    	<length string="${app_style_menu_logout_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_about_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_about_icon}"/>
+	    	<length string="${app_style_menu_about_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<condition property="has_menu_exit_icon">  
+	  	<and>  
+	   		<available file="${app_style_menu_exit_icon}"/>
+	    	<length string="${app_style_menu_exit_icon}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_picture">  
+	  	<and>  
+	   		<available file="${app_style_picture}"/>
+	    	<length string="${app_style_picture}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_quan">  
+	  	<and>  
+	   		<available file="${app_style_quan}"/>
+	    	<length string="${app_style_quan}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<!-- copy style resouces -->
+    <target name="copy.head_bg" if="${has_head_bg}">
+		<echo>copy.head_bg</echo>
+		<copy file="${app_style_head_bg}" tofile="${res.abs}/drawable-hdpi/head_bg.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.head_back" if="${has_head_back}">
+		<echo>copy.head_back</echo>
+    	<copy file="${app_style_head_back}" tofile="${res.abs}/drawable/head_back.png" overwrite="true"></copy>
+    	<copy file="${app_style_head_back}" tofile="${res.abs}/drawable-hdpi/head_back.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.head_catalog_down" if="${has_head_catalog_down}">
+		<echo>copy.head_catalog_down</echo>
+    	<copy file="${app_style_head_catalog_down}" tofile="${res.abs}/drawable/head_catalog_down.png" overwrite="true"></copy>
+    	<copy file="${app_style_head_catalog_down}" tofile="${res.abs}/drawable-hdpi/head_catalog_down.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.foot_bg" if="${has_foot_bg}">
+		<echo>copy.foot_bg</echo>
+		<copy file="${app_style_foot_bg}" tofile="${res.abs}/drawable-hdpi/foot_bg.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.foot_exp_icon" if="${has_foot_exp_icon}">
+		<echo>copy.foot_exp_icon</echo>
+		<copy file="${app_style_foot_exp_icon}" tofile="${res.abs}/drawable/foot_exp_icon.png" overwrite="true"></copy>
+    	<copy file="${app_style_foot_exp_icon}" tofile="${res.abs}/drawable-hdpi/foot_exp_icon.png" overwrite="true"></copy>
+    </target>
+	
+    <target name="copy.foot_review_icon" if="${has_foot_review_icon}">
+		<echo>copy.foot_review_icon</echo>
+    	<copy file="${app_style_foot_review_icon}" tofile="${res.abs}/drawable/foot_review_icon.png" overwrite="true"></copy>
+    	<copy file="${app_style_foot_review_icon}" tofile="${res.abs}/drawable-hdpi/foot_review_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.foot_share_icon" if="${has_foot_share_icon}">
+		<echo>copy.foot_share_icon</echo>
+		<copy file="${app_style_foot_share_icon}" tofile="${res.abs}/drawable/foot_share_icon.png" overwrite="true"></copy>
+    	<copy file="${app_style_foot_share_icon}" tofile="${res.abs}/drawable-hdpi/foot_share_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.listview_divide" if="${has_listview_divide}">
+		<echo>copy.listview_divide</echo>
+		<copy file="${app_style_listview_divide}" tofile="${res.abs}/drawable/listview_divide.png" overwrite="true"></copy>
+    	<copy file="${app_style_listview_divide}" tofile="${res.abs}/drawable-hdpi/listview_divide.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.listview_review_icon" if="${has_listview_review_icon}">
+		<echo>copy.listview_review_icon</echo>
+    	<copy file="${app_style_listview_review_icon}" tofile="${res.abs}/drawable/listview_review_icon.png" overwrite="true"></copy>
+    	<copy file="${app_style_listview_review_icon}" tofile="${res.abs}/drawable-hdpi/listview_review_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_home_icon" if="${has_menu_home_icon}">
+		<echo>copy.menu_home_icon</echo>
+		<copy file="${app_style_menu_home_icon}" tofile="${res.abs}/drawable-hdpi/menu_home_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_review_icon" if="${has_menu_review_icon}">
+		<echo>copy.menu_review_icon</echo>
+		<copy file="${app_style_menu_review_icon}" tofile="${res.abs}/drawable-hdpi/menu_review_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_publish_icon" if="${has_menu_publish_icon}">
+		<echo>copy.menu_publish_icon</echo>
+		<copy file="${app_style_menu_publish_icon}" tofile="${res.abs}/drawable-hdpi/menu_publish_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_login_icon" if="${has_menu_login_icon}">
+		<echo>copy.menu_login_icon</echo>
+		<copy file="${app_style_menu_login_icon}" tofile="${res.abs}/drawable-hdpi/menu_login_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_logout_icon" if="${has_menu_logout_icon}">
+		<echo>copy.menu_logout_icon</echo>
+		<copy file="${app_style_menu_logout_icon}" tofile="${res.abs}/drawable-hdpi/menu_logout_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_about_icon" if="${has_menu_about_icon}">
+		<echo>copy.menu_about_icon</echo>
+		<copy file="${app_style_menu_about_icon}" tofile="${res.abs}/drawable-hdpi/menu_about_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.menu_exit_icon" if="${has_menu_exit_icon}">
+		<echo>copy.menu_exit_icon</echo>
+		<copy file="${app_style_menu_exit_icon}" tofile="${res.abs}/drawable-hdpi/menu_exit_icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.picture" if="${has_picture}">
+		<echo>copy.picture</echo>
+		<copy file="${app_style_picture}" tofile="${res.abs}/drawable-hdpi/picture.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.quan" if="${has_quan}">
+		<echo>copy.quan</echo>
+		<copy file="${app_style_quan}" tofile="${res.abs}/drawable/quan.png" overwrite="true"></copy>
+    	<copy file="${app_style_quan}" tofile="${res.abs}/drawable-hdpi/quan.png" overwrite="true"></copy>
+    </target>
+	
+	<!-- Package the style resources. -->
+    <target name="style" depends="copy.head_bg,copy.head_back,copy.head_catalog_down,
+    	copy.foot_bg,copy.foot_exp_icon,copy.foot_review_icon,copy.foot_share_icon,
+    	copy.listview_divide,copy.listview_review_icon,
+    	copy.menu_home_icon,copy.menu_review_icon,copy.menu_publish_icon,copy.menu_login_icon,
+    	copy.menu_logout_icon,copy.menu_about_icon,copy.menu_exit_icon,
+    	copy.picture,copy.quan">
+		<echo>Modify file: colors.xml </echo>
+		<replace file="${res.abs}/values/colors.xml" value="" encoding="utf-8">
+			<replacefilter token="#app_style_blog_catalog_title#" value="${app_style_blog_catalog_title}"/>
+			<replacefilter token="#app_style_blog_list_background#" value="${app_style_blog_list_background}"/>
+			<replacefilter token="#app_style_blog_list_title#" value="${app_style_blog_list_title}"/>
+			<replacefilter token="#app_style_blog_list_content#" value="${app_style_blog_list_content}"/>
+			<replacefilter token="#app_style_blog_list_info#" value="${app_style_blog_list_info}"/>
+			<replacefilter token="#app_style_blog_list_reviewcount#" value="${app_style_blog_list_reviewcount}"/>
+			<replacefilter token="#app_style_blog_detail_head_title#" value="${app_style_blog_detail_head_title}"/>
+			<replacefilter token="#app_style_blog_relative_title#" value="${app_style_blog_relative_title}"/>
+			<replacefilter token="#app_style_blog_publish_head_title#" value="${app_style_blog_publish_head_title}"/>
+			<replacefilter token="#app_style_review_publish_head_title#" value="${app_style_review_publish_head_title}"/>
+			<replacefilter token="#app_style_blog_review_head_title#" value="${app_style_blog_review_head_title}"/>
+			<replacefilter token="#app_style_blog_review_listview_index#" value="${app_style_blog_review_listview_index}"/>
+			<replacefilter token="#app_style_blog_review_listview_user#" value="${app_style_blog_review_listview_user}"/>
+			<replacefilter token="#app_style_blog_review_listview_date#" value="${app_style_blog_review_listview_date}"/>
+			<replacefilter token="#app_style_blog_review_listview_content#" value="${app_style_blog_review_listview_content}"/>
+			<replacefilter token="#app_style_review_list_head_title#" value="${app_style_review_list_head_title}"/>
+			<replacefilter token="#app_style_review_list_blog_title#" value="${app_style_review_list_blog_title}"/>
+			<replacefilter token="#app_style_review_list_user#" value="${app_style_review_list_user}"/>
+			<replacefilter token="#app_style_review_list_date#" value="${app_style_review_list_date}"/>
+			<replacefilter token="#app_style_review_list_content#" value="${app_style_review_list_content}"/>
+			<replacefilter token="#app_style_foot_detail_reviewcount#" value="${app_style_foot_detail_reviewcount}"/>
+			<replacefilter token="#app_style_pull_to_refresh_lastUpdated#" value="${app_style_pull_to_refresh_lastUpdated}"/>
+			<replacefilter token="#app_style_about_powered#" value="${app_style_about_powered}"/>
+		</replace>
+    </target>       	
+
+</project>

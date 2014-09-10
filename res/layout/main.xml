@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nextapp.app.widget.ScrollLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/main_scrolllayout"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:background="@color/white">
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    
+		<include layout="@layout/head_main" />
+		
+	   	<cn.nextapp.app.widget.PullToRefreshListView
+		    android:id="@+id/main_listview"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:divider="@drawable/listview_divide"
+	    	android:dividerHeight="1dp"
+			android:fadingEdge="none"
+			android:scrollingCache="false"
+			android:background="@color/blog_list_background">
+		</cn.nextapp.app.widget.PullToRefreshListView>
+		
+	</LinearLayout>
+	
+	<include layout="@layout/review_list" />
+	
+</cn.nextapp.app.widget.ScrollLayout> 

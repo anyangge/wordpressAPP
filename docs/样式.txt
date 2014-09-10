@@ -1,0 +1,29 @@
+需要样式替换的图片：
+
+head_bg.png			头部背景
+head_back.png			头部返回
+head_catalog_down.png		头部分类下拉
+
+foot_bg.png			底部背景
+foot_exp_icon.png		底部浏览器图标
+foot_review_icon.png		底部评论图标
+foot_share_icon.png		底部分享图标
+
+listview_divide.png		列表项分割线
+listview_review_icon.png	列表项评论数图标
+
+menu_home_icon.png		菜单文章列表图标
+menu_review_icon.png		菜单评论列表图标
+menu_publish_icon.png		菜单发表文章图标
+menu_login_icon.png		菜单登录图标
+menu_logout_icon.png		菜单登出图标
+menu_about_icon.png		菜单关于图标
+menu_exit_icon.png		菜单退出图标
+
+picture.png			插入图片图标
+quan.png			相关文章的小圆圈图标
+
+
+需要样式替换的文字颜色：
+
+colors.xml

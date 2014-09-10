@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="7dp">   
+
+    <LinearLayout 
+   		android:orientation="horizontal" 
+       	android:layout_width="wrap_content"  
+       	android:layout_height="wrap_content">
+        <TextView 
+        	android:id="@+id/blog_review_listview_index" 
+            android:layout_width="wrap_content" 
+         	android:layout_height="wrap_content"
+         	android:textColor="@color/blog_review_listview_index"/>
+        <TextView 
+        	android:id="@+id/blog_review_listview_user" 
+            android:layout_width="wrap_content" 
+         	android:layout_height="wrap_content"
+         	android:textStyle="bold"
+         	android:textColor="@color/blog_review_listview_user"/>
+        <TextView 
+        	android:id="@+id/blog_review_listview_date" 
+            android:layout_width="wrap_content" 
+         	android:layout_height="wrap_content"
+         	android:layout_marginLeft="8dp"
+         	android:textSize="11sp"
+         	android:textColor="@color/blog_review_listview_date"/>
+      </LinearLayout>
+     
+      <TextView 
+      		android:id="@+id/blog_review_listview_content"  
+   			android:layout_width="wrap_content" 
+          	android:layout_height="wrap_content" 
+          	android:layout_marginTop="3dp"
+           	android:textColor="@color/blog_review_listview_content"/> 
+
+</LinearLayout> 

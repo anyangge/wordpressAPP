@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+	<com.commonsware.cwac.richedit.RichEditText
+		android:id="@+id/cwac_richedittext_editor"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+	    android:gravity="top|left"
+	    android:imeOptions="flagNoExtractUi"
+	    android:lines="8"
+        android:hint="@string/blog_publish_hint_content">
+	</com.commonsware.cwac.richedit.RichEditText>
+
+	<com.commonsware.cwac.richedit.RichEditToolbar
+		android:id="@+id/cwac_richedittext_toolbar"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</com.commonsware.cwac.richedit.RichEditToolbar>
+
+</LinearLayout>
