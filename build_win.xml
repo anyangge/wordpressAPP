@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================================ -->
+<!-- Build an Android project.                        -->
+<!-- ================================================ -->
+<project name="NextApp" default="zipalign" basedir=".">	
+
+	<property file="default.properties" />
+	<property file="build.properties" />
+	
+	<!-- jdk的路径 -->
+	<property name="jdk.home" value="D:/JDK"/>
+	<!-- sdk的路径 -->
+	<property name="sdk.home" value="D:/Android SDK"/>
+	<!-- 版本 -->
+	<property name="sdk.platform" value="${target}"/>
+	<!--签名相关的key -->
+	<property name="keystore" value="NextApp.keystore" />
+	<property name="keystore.alias" value="NextApp" />
+	<!-- 签名相关的密码 -->
+	<property name="keystore.password" value="nextapp" />
+	<property name="keystore.alias.password" value="nextapp" />
+	<property name="keystore.path" value="${basedir}/NextApp.keystore" />
+	
+    <!-- The absolute paths for the tools. -->
+    <property name="android.framework" value="${sdk.home}/platforms/${sdk.platform}/framework.aidl"></property>
+    <property name="android.core" value="${sdk.home}/platforms/${sdk.platform}/android.jar"></property>
+    <property name="jarsigner" value="${jdk.home}/bin/jarsigner.exe"></property>
+    <property name="zipalign" value="${sdk.home}/tools/zipalign.exe"></property>
+    <property name="dx" value="${sdk.home}/platform-tools/dx.bat"></property>
+    <property name="apk-builder" value="${sdk.home}/tools/apkbuilder.bat"></property>
+    <property name="aapt" value="${sdk.home}/platform-tools/aapt.exe"></property>
+    <property name="aidl" value="${sdk.home}/platform-tools/aidl.exe"></property>
+    
+    <!-- The absolute path. -->
+    <property name="src.abs" value="${basedir}/src"></property>
+    <property name="res.abs" value="${basedir}/res"></property>
+    <property name="lib.abs" value="${basedir}/lib"></property>
+    <property name="bin.abs" value="${basedir}/bin"></property>
+    <property name="dex.abs" value="${basedir}/bin/classes.dex"></property>
+    <property name="resources.abs" value="${basedir}/bin/resources.ap_"></property>
+    <property name="unsigned.abs" value="${basedir}/bin/${ant.project.name}-unsigned.apk"></property>
+    <property name="signed.abs" value="${basedir}/bin/${ant.project.name}-signed.apk"></property>
+    	
+    <!-- Cleaning the project -->
+    <target name="clean">
+        <echo>Cleaning the project...</echo>
+        <delete dir="bin"/>
+        <delete dir="gen"/>
+        <mkdir dir="bin"/>
+        <mkdir dir="gen"/>
+    </target>
+	
+	<!-- Is has image -->
+	<condition property="has_icon">  
+		<and>  
+			<available file="${app_imgpath_icon}"/>
+			<length string="${app_imgpath_icon}" trim="true" when="greater" length="0" />
+		</and>  
+	</condition>
+ 
+	<condition property="has_logo">  
+	  	<and>  
+	   		<available file="${app_imgpath_logo}"/>
+	    	<length string="${app_imgpath_logo}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+
+	<condition property="has_welcome">  
+	  	<and>  
+	   		<available file="${app_imgpath_welcome}"/>
+	    	<length string="${app_imgpath_welcome}" trim="true" when="greater" length="0" />
+	  	</and>  
+	</condition>
+	
+	<!-- copy resouces -->
+    <target name="copy.icon" if="${has_icon}">
+		<echo>create new icon</echo>
+		<copy file="${app_imgpath_icon}" tofile="${res.abs}/drawable/icon.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.logo" if="${has_logo}">
+		<echo>create new logo</echo>
+		<copy file="${app_imgpath_logo}" tofile="${res.abs}/drawable/logo.png" overwrite="true"></copy>
+		<copy file="${app_imgpath_logo}" tofile="${res.abs}/drawable-hdpi/logo.png" overwrite="true"></copy>
+    </target>
+
+    <target name="copy.welcome" if="${has_welcome}">
+		<echo>create new welcome</echo>
+		<copy file="${app_imgpath_welcome}" tofile="${res.abs}/drawable/welcome.png" overwrite="true"></copy>
+    </target>
+	
+    <!-- Init the project -->
+    <target name="init" depends="clean,copy.icon,copy.logo,copy.welcome">
+        <echo>Init the project...</echo>
+			
+		<echo>Create directory: ${app_package_path}</echo>
+		<mkdir dir="src/${app_package_path}"/>
+		
+		<echo>Create file: Start.java in new package</echo>
+		<echo file="src/${app_package_path}/Start.java" append="false">
+			package ${app_package_name};
+			public class Start extends cn.nextapp.app.blog.Start{}
+		</echo>
+		
+		<echo>Modify file: AndroidManifest.xml </echo>
+		<replace file="AndroidManifest.xml" token='package="cn.nextapp.app.blog"' value='package="${app_package_name}"' encoding="utf-8"/>
+			
+		<echo>Modify file: configs.xml </echo>
+		<replace file="${res.abs}/values/configs.xml" value="" encoding="utf-8">
+			<replacefilter token="#app_name#" value="${app_name}"/>
+			<replacefilter token="#app_version_name#" value="${app_version_name}"/>
+			<replacefilter token="#app_version_code#" value="${app_version_code}"/>
+			<replacefilter token="#app_about_title#" value="${app_name}"/>
+			<replacefilter token="#app_about_intro#" value="${app_about_intro}"/>
+			<replacefilter token="#app_about_website#" value="${app_about_website}"/>
+			<replacefilter token="#app_api_url#" value="${app_api_url}"/>
+		</replace>
+    </target>       	
+            	
+    <!-- Generate R.jave -->
+    <target name="generate" depends="init">
+        <echo>Generating R.java / Manifest.java from the resources...</echo>
+        <exec executable="${aapt}" failonerror="true">
+            <arg value="package"/>
+            <arg value="-m"/>
+            <arg value="-J"/>
+            <arg value="gen"/>
+            <arg value="-M"/>
+            <arg value="AndroidManifest.xml"/>
+            <arg value="-S"/>
+            <arg value="res"/>
+            <arg value="-I"/>
+            <arg value="${android.core}"/>
+        </exec>
+    	<move file="gen/${app_package_path}/R.java" todir="gen/cn/nextapp/app/blog"/>
+		<replace file="gen/cn/nextapp/app/blog/R.java" token="${app_package_name}" value="cn.nextapp.app.blog" encoding="utf-8"/>
+    </target>
+    
+    <!-- Package the resources. -->
+    <target name="package">
+        <echo>Packaging resources and assets...</echo>
+        <exec executable="${aapt}" failonerror="true">
+            <arg value="package"/>
+            <arg value="-f"/>
+            <arg value="-M"/>
+            <arg value="AndroidManifest.xml"/>
+            <arg value="-S"/>
+            <arg value="${res.abs}"/>
+            <arg value="-A"/>
+            <arg value="assets"/>
+            <arg value="-I"/>
+            <arg value="${android.core}"/>
+            <arg value="-F"/>
+            <arg value="${resources.abs}"/>
+        </exec>
+    </target>
+
+    <!-- Convert and compile AIDL files. -->
+    <target name="aidl">
+        <echo>Compiling aidl files into Java classes...</echo>
+        <apply executable="${aidl}" failonerror="true">
+            <arg value="-p${android.framework}"/>
+            <arg value="-Isrc"/>
+            <arg value="-ogen"/>
+            <fileset dir="${src.abs}">
+                <include name="**/*.aidl">
+            </include></fileset>
+        </apply>
+    </target>
+
+    <!-- Compile -->
+    <target name="compile" depends="generate,aidl">
+        <javac fork="true" encoding="UTF-8" target="1.6" debug="off" extdirs="" srcdir="src:gen" destdir="${bin.abs}" bootclasspath="${android.core}" includeantruntime="on">
+            <classpath>
+                <fileset dir="${lib.abs}" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+    
+    <!-- Convert and compress .class files to .dex file. -->
+    <target name="dex" depends="compile">
+        <echo>Converting compiled files and external libraries into dex format file...</echo>
+        <apply executable="${dx}" failonerror="true" parallel="true">
+            <arg value="--dex"/>
+            <arg value="--output=${dex.abs}"/> 
+            <arg path="${bin.abs}"/>
+            <fileset dir="${lib.abs}" includes="*.jar"></fileset>
+		</apply>
+    </target>
+
+    <!-- Package an unsigned APK file. -->
+    <target name="release" depends="dex, package">
+        <echo>Packaging an unsigned APK file...</echo>
+        <exec executable="${apk-builder}" failonerror="true">
+            <arg value="${unsigned.abs}"/>
+            <arg value="-u"/>
+            <arg value="-z"/>
+            <arg value="${resources.abs}"/>
+            <arg value="-f"/>
+            <arg value="${dex.abs}"/>
+            <arg value="-rf"/>
+            <arg value="${src.abs}"/>
+            <arg value="-rj"/>
+            <arg value="${lib.abs}"/>
+        </exec>
+        <echo>It will need to be signed with jarsigner before being published.</echo>
+    </target>
+    
+    <!-- Sign the APK. -->
+    <target name="jarsigner" depends="release">
+        <exec executable="${jarsigner}" failonerror="true">
+            <arg value="-digestalg"/>
+            <arg value="SHA1"/>
+            <arg value="-sigalg"/>
+            <arg value="MD5withRSA"/>
+            <arg value="-verbose"/>
+            <arg value="-storepass"/>
+            <arg value="${keystore.password}"/>
+            <arg value="-keystore"/>
+            <arg value="${keystore.path}"/>
+            <arg value="-signedjar"/>
+            <arg value="${signed.abs}"/>
+            <arg value="${unsigned.abs}"/>
+            <arg value="${keystore.alias}"/>
+        </exec>
+    </target>
+	
+    <!-- Zipalign -->
+    <target name="zipalign" depends="jarsigner">
+        <tstamp>  
+            <format property="time" pattern="yyyy-MM-dd-HH-mm-ss"></format>
+        </tstamp>
+        <exec executable="${zipalign}" failonerror="true">
+            <arg value="-v"/>
+            <arg value="-f"/>
+            <arg value="4"/>
+            <arg value="${signed.abs}"/>
+            <arg value="${basedir}/bin/${ant.project.name}.apk"/>
+        </exec>
+    </target>
+
+</project>
